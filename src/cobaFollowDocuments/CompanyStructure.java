@@ -1,3 +1,4 @@
+package cobaFollowDocuments;
 public class CompanyStructure {
     public static void main(String[] args) {
         // testing code that use to see if things are set up properly:
