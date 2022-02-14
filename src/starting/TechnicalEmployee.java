@@ -1,3 +1,5 @@
+package starting;
+
 public class TechnicalEmployee {
     public TechnicalEmployee(String name) {
         // Has a default base salary of 75000.0
@@ -5,7 +7,7 @@ public class TechnicalEmployee {
     }
     public String employeeStatus() {
         /*
-        Should return a String representation of this TechnicalEmployee
+        Should return a String representation of this starting.TechnicalEmployee
         Example: "1 Kasey has 10 successful check ins"
         */
 

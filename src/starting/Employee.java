@@ -1,6 +1,9 @@
+package starting;
+
 public class Employee {
     public Employee(String name,double baseSalary) {
-        // Construct Employee with two parameters name and base salary
+        // Construct starting.Employee with two parameters name and base salary
+
     }
     public double getBaseSalary() {
         // Should return the employee's base salary
@@ -18,7 +21,7 @@ public class Employee {
     }
     public Employee getManager() {
         /*
-        Should return a reference to the Employee object that
+        Should return a reference to the starting.Employee object that
         represents this employee's manager
         */
     }
@@ -34,8 +37,8 @@ public class Employee {
     }
     public String employeeStatus() {
         /*
-        Should return a String representation of that Employee's
-        current status. This will be different for every subclass of Employee
+        Should return a String representation of that starting.Employee's
+        current status. This will be different for every subclass of starting.Employee
         */
     }
 }
