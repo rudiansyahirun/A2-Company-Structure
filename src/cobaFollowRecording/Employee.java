@@ -11,8 +11,8 @@ public abstract class Employee {
         // Construct Employee with two parameters name and base salary
         this.name = name;
         this.baseSalary = baseSalary;
-        this.employeeID = counter;
-        ++counter;
+        this.employeeID = counter; // assign employeeID
+        ++counter; // increment counter
     }
 
 
