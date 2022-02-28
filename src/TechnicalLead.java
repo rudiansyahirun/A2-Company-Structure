@@ -1,18 +1,27 @@
-public class TechnicalLead {
+import java.util.ArrayList;
+
+public class TechnicalLead extends TechnicalEmployee {
+    public ArrayList<SoftwareEngineer> team;
+
     public TechnicalLead(String name) {
         /*
         Should create a new TechnicalLead that is a Manager.
         The TechnicalLead's base salary should be 1.3 times that of a
         TechnicalEmployee. TechnicalLeads should have a default head count of 4
         */
-
+        super(name);
+        this.team = new ArrayList<SoftwareEngineer>();
+        // base salary * 1.3
+        this.baseSalary *= 1.3;
+        // default head count of 4
+        this.headCount = 4;
     }
     public boolean hasHeadCount() {
         /*
         Should return true if the number of direct reports this manager has
         is less than their headcount.
         */
-
+        return team.size() < headCount;
     }
     public boolean addReport(SoftwareEngineer e) {
         /*
@@ -22,7 +31,13 @@ public class TechnicalLead {
         If the employee is successfully added to the TechnicalLead's direct reports
         true should be returned, false should be returned otherwise
         */
-
+        if (hasHeadCount()) { // if head count is less than 4
+            team.add(e); // add to team
+            e.setManager(this);
+            return true;
+        } else {
+            return false;
+        }
     }
     public boolean approveCheckIn(SoftwareEngineer e) {
         /*
@@ -31,7 +46,8 @@ public class TechnicalLead {
         If both those things are true, true is returned,
         otherwise false is returned.
         */
-
+        super.checkIns++; // increment checkIns
+        return e.getManager() == this && e.getCodeAccess(); // if manager is this and code access is true
     }
     public boolean requestBonus(Employee e, double bonus) {
         /*
@@ -40,7 +56,8 @@ public class TechnicalLead {
         If it is, that employee should get that bonus and true should be returned.
         False should be returned otherwise
         */
-
+        BusinessLead businessLead = (BusinessLead)getAccountantSupport().getManager(); // get business lead
+        return businessLead.approveBonus(e, bonus); // if business lead approves bonus
     }
 
     public String getTeamStatus() {
@@ -54,6 +71,14 @@ public class TechnicalLead {
         If the TechnicalLead does have reports, it might look something like
         "10 Kasey has 5 successful check ins and is managing: 5 Niky has 2 successful check ins"
         */
-
+        if (team.size() == 0) { // if team size is 0
+            return this.employeeStatus() + " and no direct reports yet"; // return employee status and no direct reports
+        } else { // if team size is not 0
+            String teamStatus = ""; // initialize team status
+            for (int i = 0; i < team.size(); i++) { // for each team member
+                teamStatus += team.get(i).employeeStatus() + "\n"; // add team member status to team status
+            }
+            return this.employeeStatus() + " is managing: \n" + teamStatus; // return employee status and team status
+        }
     }
 }

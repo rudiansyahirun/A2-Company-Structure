@@ -1,9 +1,12 @@
-public class Accountant {
+public class Accountant extends BusinessEmployee {
+    public TechnicalLead teamSupported;
+
     public Accountant(String name) {
         /*
         Should start with a bonus budget of 0 and no team they are officially supporting
         */
-
+        super(name);
+        bonusBudget = 0;
     }
     public TechnicalLead getTeamSupported() {
         /*
@@ -11,7 +14,7 @@ public class Accountant {
         this Accountant is currently supporting.
         If they have not been assigned a TechnicalLead, null should be returned
         */
-
+        return teamSupported;
     }
     public void supportTeam(TechnicalLead lead) {
         /*
@@ -23,9 +26,12 @@ public class Accountant {
         each with a salary of 75000, the Accountant's budget
         should be 150000 + 15000 for a total of 165000
         */
-
+        this.teamSupported = lead;
+        for (int i = 0; i < lead.team.size(); i++) {
+            this.bonusBudget += lead.team.get(i).getBaseSalary() * 1.1;
+        }
     }
-    public boolean approveBonus(double bonus) {
+    public boolean canApproveBonus(double bonus) {
         /*
         Should take in a suggested bonus amount and check if
         there is still enough room in the budget.
@@ -33,7 +39,13 @@ public class Accountant {
         false should be returned, otherwise true.
         If the accountant is not supporting any team false should be returned.
         */
-
+        double requestedBonus = bonus;
+        if (requestedBonus <= getBonusBudget()) {
+            return true;
+        } else {
+            System.out.println("Rejected. Because budget not sufficient");
+            return false;
+        }
     }
     public String employeeStatus() {
         /*
@@ -42,6 +54,6 @@ public class Accountant {
         and the name of the TechnicalLead they are currently supporting.
         Example: "1 Kasey with a budget of 22500.0 is supporting Satya Nadella"
         */
-
+        return this + " with a budget of " + getBonusBudget() + " is supporting " + this.getTeamSupported();
     }
 }
